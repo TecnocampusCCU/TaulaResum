@@ -1,0 +1,1508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TaulaResumDialogBase</class>
+ <widget class="QDialog" name="TaulaResumDialogBase">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>618</width>
+    <height>444</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>618</width>
+    <height>444</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>618</width>
+    <height>444</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>TaulaResum</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon.png</normaloff>icon.png</iconset>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <widget class="QTabWidget" name="GrupPestanyes">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>70</y>
+     <width>471</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>4</number>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>16</height>
+    </size>
+   </property>
+   <widget class="QWidget" name="EDAT">
+    <attribute name="title">
+     <string>EDAT</string>
+    </attribute>
+    <widget class="QGroupBox" name="grupCriteri">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>321</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(234, 234, 234);</string>
+     </property>
+     <property name="title">
+      <string>Criteri</string>
+     </property>
+     <widget class="QRadioButton" name="btoEdatRestrictiu">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>271</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Edat màxima criteri restrictiu</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="btoEdatAmpli">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>301</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Edat màxima criteri ampli</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="grupData">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>321</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(234, 234, 234);</string>
+     </property>
+     <property name="title">
+      <string>Data</string>
+     </property>
+     <widget class="QRadioButton" name="btoDataAvui">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>171</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Data d'avui</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="btoData">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>61</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Data:</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="data">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>50</y>
+        <width>110</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="grupMarge">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>321</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(234, 234, 234);</string>
+     </property>
+     <property name="title">
+      <string>Marge d'edat</string>
+     </property>
+     <widget class="QLineEdit" name="txtEdatMin">
+      <property name="geometry">
+       <rect>
+        <x>75</x>
+        <y>20</y>
+        <width>31</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>61</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Edat mínima</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>61</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Edat màxima</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtEdatMax">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>75</x>
+        <y>50</y>
+        <width>31</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="GENERE">
+    <attribute name="title">
+     <string>GENERE</string>
+    </attribute>
+    <widget class="QPushButton" name="btoHome">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>50</y>
+       <width>171</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>HOME</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btoDona">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>180</y>
+       <width>171</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>DONA</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="ESTUDIS">
+    <attribute name="title">
+     <string>ESTUDIS</string>
+    </attribute>
+    <widget class="QListWidget" name="llistaEstudis">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>10</y>
+       <width>171</width>
+       <height>331</height>
+      </rect>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="ORIGEN">
+    <attribute name="title">
+     <string>ORIGEN</string>
+    </attribute>
+    <widget class="QRadioButton" name="btoPais">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PAIS</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="btoZones">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>20</y>
+       <width>141</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ZONES DE CONTINENTS</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="btoEuropa27">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>20</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>EUROPA DELS 28</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="LlistaPais">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>50</y>
+       <width>141</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="LlistaZonesCont">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>50</y>
+       <width>141</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>50</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Alemanya</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>70</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Àustria</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>90</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bèlgica</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>110</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bulgària</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>150</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Dinamarca</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>170</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Eslovàquia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>190</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Eslovènia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>230</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Estònia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>270</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>França</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>250</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Finlàndia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>210</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Espanya</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_35">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>130</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Croàcia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_36">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>310</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hongria</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_37">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>290</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Grècia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_38">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>170</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Països Baixos</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_39">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>310</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Xipre</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_40">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>230</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>R. Txeca</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_41">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>250</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Regne Unit</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_42">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>50</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Irlanda</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_43">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>150</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Malta</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_44">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>70</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Itàlia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_45">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>130</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Luxemburg</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_46">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>190</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Polònia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_47">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>290</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Suècia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_48">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>90</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Letònia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_49">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>210</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Portugal</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_50">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>110</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Lituània</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_51">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>270</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Romania</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="NACIONALITAT">
+    <attribute name="title">
+     <string>NACIONALITAT</string>
+    </attribute>
+    <widget class="QRadioButton" name="btoEuropa27_3">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>20</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>EUROPA DELS 28</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_52">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>110</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Lituània</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_53">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>190</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Eslovènia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_54">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>110</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bulgària</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_55">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>190</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Polònia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_56">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>250</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Regne Unit</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_57">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>70</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Àustria</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_58">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>130</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Croàcia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_59">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>50</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Alemanya</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_60">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>310</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hongria</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_61">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>270</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Romania</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_62">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>130</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Luxemburg</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_63">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>250</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Finlàndia</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="LlistaPais2">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>50</y>
+       <width>141</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_64">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>270</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>França</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_65">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>210</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Portugal</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_66">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>170</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Eslovàquia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_67">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>230</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>R. Txeca</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_68">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>70</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Itàlia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_69">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>90</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Letònia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_70">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>290</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Suècia</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="LlistaZonesCont2">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>50</y>
+       <width>141</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_71">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>150</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Dinamarca</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_72">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>150</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Malta</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_73">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>310</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Xipre</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_74">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>170</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Països Baixos</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="btoZones_3">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>20</y>
+       <width>141</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ZONES DE CONTINENTS</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="btoPais_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PAIS</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_75">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>230</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Estònia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_76">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>290</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Grècia</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_77">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>50</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Irlanda</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_78">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>210</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Espanya</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_79">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>90</y>
+       <width>46</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bèlgica</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="Metodes">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>5</y>
+     <width>231</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Mètode de treball</string>
+   </property>
+   <widget class="QRadioButton" name="ILLES">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>51</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ILLES</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="PARCELES">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>20</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PARCEL·LES</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="PORTALS">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>20</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PORTALS</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="TOTS">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>40</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TOTS</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QComboBox" name="comboConnexions">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>7</y>
+     <width>151</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Connexio">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>10</y>
+     <width>46</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Connexió</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="grupFiltres">
+   <property name="geometry">
+    <rect>
+     <x>475</x>
+     <y>51</y>
+     <width>141</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 170, 142);</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QPushButton" name="btoEDAT">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>12</y>
+      <width>135</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(216, 216, 216);</string>
+    </property>
+    <property name="text">
+     <string>EDAT</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btoGENERE">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>60</y>
+      <width>135</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(216, 216, 216);</string>
+    </property>
+    <property name="text">
+     <string>GENERE</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btoORIGEN">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>158</y>
+      <width>135</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(216, 216, 216);</string>
+    </property>
+    <property name="text">
+     <string>ORIGEN</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btoESTUDIS">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>110</y>
+      <width>135</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(216, 216, 216);</string>
+    </property>
+    <property name="text">
+     <string>ESTUDIS</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btoNACIONALITAT">
+    <property name="geometry">
+     <rect>
+      <x>3</x>
+      <y>210</y>
+      <width>135</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(216, 216, 216);</string>
+    </property>
+    <property name="text">
+     <string>NACIONALITAT</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="lblFiltres">
+   <property name="geometry">
+    <rect>
+     <x>475</x>
+     <y>16</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 89, 60);
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>FILTRES</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btoCrearTaula">
+   <property name="geometry">
+    <rect>
+     <x>475</x>
+     <y>316</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(85, 255, 127);</string>
+   </property>
+   <property name="text">
+    <string>INICI</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btoSortir">
+   <property name="geometry">
+    <rect>
+     <x>475</x>
+     <y>371</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 156, 156);</string>
+   </property>
+   <property name="text">
+    <string>SORTIR</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="versio">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>420</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>V.XXXXXX</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblEstatConn">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>36</y>
+     <width>211</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>No connectat</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
