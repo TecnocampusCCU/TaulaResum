@@ -10,7 +10,7 @@
 name=TaulaResum
 qgisMinimumVersion=3.0
 description=Modul per obtenir les taules resum del Padro
-version=19.1021
+version=Q3.191021
 author=Josep Lopez Xarbau / CCU
 email=jlopez@tecnocampus.cat
 
