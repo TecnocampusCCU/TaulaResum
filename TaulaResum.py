@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.191021"
+Versio_modul="V_Q3.191119"
 
 '''
 Classe principal 'Taula Resum'
@@ -676,9 +676,17 @@ class TaulaResum:
 
                                     zonaCont=zonaCont[0:len(zonaCont)-4]
                                     SQL_Pro = 'SELECT "CONCODPAI" from "public"."CONTINENTS" '  + zonaCont  + ' ORDER BY 1'                                    
-                                   
-                                    cur.execute(SQL_Pro)
-                                    rows = cur.fetchall()
+                                    
+                                    try:
+                                        cur.execute(SQL_Pro)
+                                        rows = cur.fetchall()
+                                    except Exception as ex:
+                                        print("Error SELECT concodpai")
+                                        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                                        message = template.format(type(ex).__name__, ex.args)
+                                        print (message)
+                                        self.tornaConnectat()
+                                        QMessageBox.information(None, "Error", "Error SELECT concodpai")
                                     where += '('
                                     for index,row in enumerate(rows,start=0):
                                         if index == 0:
@@ -699,8 +707,16 @@ class TaulaResum:
                                    return
                             elif self.dlg.btoEuropa27.isChecked():
                                 SQL_Pro = 'select "CONCODPAI" from "public"."CONTINENTS"  WHERE  "UE27" = 1 ORDER BY 1'
-                                cur.execute(SQL_Pro)
-                                rows = cur.fetchall()
+                                try:
+                                    cur.execute(SQL_Pro)
+                                    rows = cur.fetchall()
+                                except Exception as ex:
+                                    print("Error SELECT concodpai.")
+                                    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                                    message = template.format(type(ex).__name__, ex.args)
+                                    print (message)
+                                    self.tornaConnectat()
+                                    QMessageBox.information(None, "Error", "Error SELECT concodpai.")
                                 where += '('
                                 for index,row in enumerate(rows,start=0):
                                     if index == 0:
@@ -739,9 +755,16 @@ class TaulaResum:
 
                                     zonaCont=zonaCont[0:len(zonaCont)-4]
                                     SQL_Pro = 'SELECT "CONCODPAI" from "public"."CONTINENTS" '  + zonaCont  + ' ORDER BY 1' 
-                                    
-                                    cur.execute(SQL_Pro)
-                                    rows = cur.fetchall()
+                                    try:
+                                        cur.execute(SQL_Pro)
+                                        rows = cur.fetchall()
+                                    except Exception as ex:
+                                        print("Error SELECT concodpai.")
+                                        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                                        message = template.format(type(ex).__name__, ex.args)
+                                        print (message)
+                                        self.tornaConnectat()
+                                        QMessageBox.information(None, "Error", "Error SELECT concodpai.")
                                     where += '('
                                     for index,row in enumerate(rows,start=0):
                                         if index == 0:
@@ -756,8 +779,16 @@ class TaulaResum:
                                    return
                             elif self.dlg.btoEuropa27_3.isChecked():
                                 SQL_Pro = 'select "CONCODPAI" from "public"."CONTINENTS"  WHERE  "UE27" = 1 ORDER BY 1'
-                                cur.execute(SQL_Pro)
-                                rows = cur.fetchall()
+                                try:
+                                    cur.execute(SQL_Pro)
+                                    rows = cur.fetchall()
+                                except Exception as ex:
+                                    print("Error SELECT concodpai.")
+                                    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                                    message = template.format(type(ex).__name__, ex.args)
+                                    print (message)
+                                    self.tornaConnectat()
+                                    QMessageBox.information(None, "Error", "Error SELECt concodpai.")
                                 where += '('
                                 for index,row in enumerate(rows,start=0):
                                     if index == 0:
