@@ -36,7 +36,7 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtSql import *
-from PyQt5.QtWidgets import QAction,QMessageBox,QTableWidgetItem, QApplication, QFileDialog
+from PyQt5.QtWidgets import QAction,QMessageBox,QTableWidgetItem, QApplication, QFileDialog,QToolBar
 
 #from qgis.core import QgsDataSourceURI
 from qgis.utils import iface
@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.191119"
+Versio_modul="V_Q3.200108"
 
 '''
 Classe principal 'Taula Resum'
@@ -122,8 +122,16 @@ class TaulaResum:
         self.actions = []
         self.menu = self.tr('&CCU')
         # TODO: We are going to let the user set this up in a future iteration
-        self.toolbar = self.iface.addToolBar('CCU')
-        self.toolbar.setObjectName('TaulaResum')
+        #self.toolbar = self.iface.addToolBar('CCU')
+        #self.toolbar.setObjectName('TaulaResum')
+        trobat=False
+        for x in iface.mainWindow().findChildren(QToolBar,'CCU'): 
+            self.toolbar = x
+            trobat=True
+        
+        if not trobat:
+            self.toolbar = self.iface.addToolBar('CCU')
+            self.toolbar.setObjectName('CCU')
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -975,9 +983,10 @@ class TaulaResum:
             self.iface.removePluginMenu(
                 self.tr(u'&TaulaResum'),
                 action)
-            self.iface.removeToolBarIcon(action)
+            #self.iface.removeToolBarIcon(action)
+            self.toolbar.removeAction(action)
         # remove the toolbar
-        del self.toolbar
+        #del self.toolbar
 
 
     def run(self):
