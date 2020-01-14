@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.200108"
+Versio_modul="V_Q3.200114"
 
 '''
 Classe principal 'Taula Resum'
@@ -981,7 +981,7 @@ class TaulaResum:
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu(
-                self.tr(u'&TaulaResum'),
+                self.tr(u'&CCU'),
                 action)
             #self.iface.removeToolBarIcon(action)
             self.toolbar.removeAction(action)
