@@ -51,7 +51,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>3</number>
    </property>
    <property name="iconSize">
     <size>
@@ -354,7 +354,7 @@ color: rgb(0, 0, 0);</string>
       </rect>
      </property>
      <property name="text">
-      <string>EUROPA DELS 28</string>
+      <string>EUROPA DELS 27</string>
      </property>
     </widget>
     <widget class="QListWidget" name="LlistaPais">
@@ -582,7 +582,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>310</y>
+       <y>290</y>
        <width>46</width>
        <height>16</height>
       </rect>
@@ -602,19 +602,6 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="text">
       <string>R. Txeca</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_41">
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>250</y>
-       <width>61</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Regne Unit</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_42">
@@ -686,7 +673,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>290</y>
+       <y>270</y>
        <width>46</width>
        <height>16</height>
       </rect>
@@ -738,7 +725,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>270</y>
+       <y>250</y>
        <width>51</width>
        <height>16</height>
       </rect>
@@ -762,7 +749,7 @@ color: rgb(0, 0, 0);</string>
       </rect>
      </property>
      <property name="text">
-      <string>EUROPA DELS 28</string>
+      <string>EUROPA DELS 27</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_52">
@@ -815,19 +802,6 @@ color: rgb(0, 0, 0);</string>
      </property>
      <property name="text">
       <string>Polònia</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_56">
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>250</y>
-       <width>61</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Regne Unit</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_57">
@@ -886,7 +860,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>270</y>
+       <y>250</y>
        <width>51</width>
        <height>16</height>
       </rect>
@@ -1016,7 +990,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>290</y>
+       <y>270</y>
        <width>46</width>
        <height>16</height>
       </rect>
@@ -1068,7 +1042,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>390</x>
-       <y>310</y>
+       <y>290</y>
        <width>46</width>
        <height>16</height>
       </rect>

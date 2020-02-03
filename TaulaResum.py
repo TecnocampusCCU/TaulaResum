@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.200114"
+Versio_modul="V_Q3.200203"
 
 '''
 Classe principal 'Taula Resum'
