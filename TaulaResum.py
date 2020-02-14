@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.200203"
+Versio_modul="V_Q3.200214"
 
 '''
 Classe principal 'Taula Resum'
@@ -535,9 +535,14 @@ class TaulaResum:
         global schema
         s = QSettings()
         
+        
+        self.dlg.setEnabled(False)
+        self.setProcessant()
         '''Control d'errors'''
         if ((not self.dlg.btoEDAT.isChecked()) and (not self.dlg.btoGENERE.isChecked()) and (not self.dlg.btoESTUDIS.isChecked()) and (not self.dlg.btoORIGEN.isChecked()) and (not self.dlg.btoNACIONALITAT.isChecked())):
                 QMessageBox.information(None, "Error 1", "No hi ha cap filtre seleccionat.\nSeleccioneu un filtre.")
+                self.dlg.setEnabled(True)
+                self.tornaConnectat()
                 #print ("No hi ha cap filtre seleccionat.\nSeleccioneu un filtre.")
         else:
             nom_conn=self.dlg.comboConnexions.currentText()
@@ -596,12 +601,14 @@ class TaulaResum:
                                 QMessageBox.information(None, "Error", u"Error al llegir les edats.\nEls camps edat mínima i edat màxima han d'estar plens")
                                 self.dlg.GrupPestanyes.setCurrentIndex(0)
                                 self.tornaConnectat()
+                                self.dlg.setEnabled(True)
                                 return
                             
                             if ((min > max) or (min < 0) or (max <= 0)):
                                 QMessageBox.information(None, "Error", u"Error:\n minim > màxim o número/s negatiu/s")
                                 self.dlg.GrupPestanyes.setCurrentIndex(0)
                                 self.tornaConnectat()
+                                self.dlg.setEnabled(True)
                                 return
                             hora = self.dlg.data.date()
                             horaAct = QtCore.QDateTime.currentDateTime()
@@ -640,6 +647,7 @@ class TaulaResum:
                                 QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap gènere seleccionat.")
                                 self.dlg.GrupPestanyes.setCurrentIndex(1)
                                 self.tornaConnectat()
+                                self.dlg.setEnabled(True)
                                 return
     
                         '''Filtre d'estudis'''
@@ -655,6 +663,7 @@ class TaulaResum:
                                 QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap estudi seleccionat.")
                                 self.dlg.GrupPestanyes.setCurrentIndex(2)
                                 self.tornaConnectat()
+                                self.dlg.setEnabled(True)
                                 return
                         
                         '''Filtre d'origen'''
@@ -674,6 +683,7 @@ class TaulaResum:
                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap país seleccionat.")
                                    self.dlg.GrupPestanyes.setCurrentIndex(3)
                                    self.tornaConnectat()
+                                   self.dlg.setEnabled(True)
                                    return 
                             elif self.dlg.btoZones.isChecked():
                                 llistaORG = self.dlg.LlistaZonesCont.selectedItems()
@@ -695,6 +705,8 @@ class TaulaResum:
                                         print (message)
                                         self.tornaConnectat()
                                         QMessageBox.information(None, "Error", "Error SELECT concodpai")
+                                        self.dlg.setEnabled(True)
+                
                                     where += '('
                                     for index,row in enumerate(rows,start=0):
                                         if index == 0:
@@ -712,6 +724,7 @@ class TaulaResum:
                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap zona continental seleccionada.")
                                    self.dlg.GrupPestanyes.setCurrentIndex(3)
                                    self.tornaConnectat()
+                                   self.dlg.setEnabled(True)
                                    return
                             elif self.dlg.btoEuropa27.isChecked():
                                 SQL_Pro = 'select "CONCODPAI" from "public"."CONTINENTS"  WHERE  "UE27" = 1 ORDER BY 1'
@@ -725,6 +738,7 @@ class TaulaResum:
                                     print (message)
                                     self.tornaConnectat()
                                     QMessageBox.information(None, "Error", "Error SELECT concodpai.")
+                                    self.dlg.setEnabled(True)
                                 where += '('
                                 for index,row in enumerate(rows,start=0):
                                     if index == 0:
@@ -753,6 +767,7 @@ class TaulaResum:
                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap país seleccionat.")
                                    self.dlg.GrupPestanyes.setCurrentIndex(4)
                                    self.tornaConnectat()
+                                   self.dlg.setEnabled(True)
                                    return 
                             elif self.dlg.btoZones_3.isChecked():
                                 llistaORG = self.dlg.LlistaZonesCont2.selectedItems()
@@ -773,6 +788,7 @@ class TaulaResum:
                                         print (message)
                                         self.tornaConnectat()
                                         QMessageBox.information(None, "Error", "Error SELECT concodpai.")
+                                        self.dlg.setEnabled(True)
                                     where += '('
                                     for index,row in enumerate(rows,start=0):
                                         if index == 0:
@@ -784,6 +800,7 @@ class TaulaResum:
                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap zona continental seleccionada.")
                                    self.dlg.GrupPestanyes.setCurrentIndex(4)
                                    self.tornaConnectat()
+                                   self.dlg.setEnabled(True)
                                    return
                             elif self.dlg.btoEuropa27_3.isChecked():
                                 SQL_Pro = 'select "CONCODPAI" from "public"."CONTINENTS"  WHERE  "UE27" = 1 ORDER BY 1'
@@ -797,6 +814,7 @@ class TaulaResum:
                                     print (message)
                                     self.tornaConnectat()
                                     QMessageBox.information(None, "Error", "Error SELECt concodpai.")
+                                    self.dlg.setEnabled(True)
                                 where += '('
                                 for index,row in enumerate(rows,start=0):
                                     if index == 0:
@@ -826,7 +844,6 @@ class TaulaResum:
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
                                     hab_illes += resultat[x][2]
                                 arxiu.close()
-                                self.tornaConnectat()
                                 if self.dlg.TOTS.isChecked() != True:
                                     QMessageBox.information(None, "Resultat", u"Taula resum creada amb " + str(hab_illes) + ' habitants')
                             except Exception as ex:
@@ -835,6 +852,7 @@ class TaulaResum:
                                 message = template.format(type(ex).__name__, ex.args)
                                 print (message)
                                 self.tornaConnectat()
+                                self.dlg.setEnabled(True)
                                 QMessageBox.information(None, "Error", u"No s'ha pogut modificar la TaulaResum de la base de dades.\nComprova els privilegis que tens.")
                         '''Per Parcel.les'''
                         if self.dlg.PARCELES.isChecked() or self.dlg.TOTS.isChecked():
@@ -854,7 +872,6 @@ class TaulaResum:
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
                                     hab_parce += resultat[x][2]
                                 arxiu.close()
-                                self.tornaConnectat()
                                 if self.dlg.TOTS.isChecked() != True:
                                     QMessageBox.information(None, "Resultat", u"Taula resum creada amb " + str(hab_parce) + ' habitants')
                             except Exception as ex:
@@ -863,6 +880,7 @@ class TaulaResum:
                                 message = template.format(type(ex).__name__, ex.args)
                                 print (message)
                                 self.tornaConnectat()
+                                self.dlg.setEnabled(True)
                                 QMessageBox.information(None, "Error", u"No s'ha pogut modificar la TaulaResum de la base de dades.\nComprova els privilegis que tens.")
                         '''Per portals'''
                         if self.dlg.PORTALS.isChecked() or self.dlg.TOTS.isChecked():
@@ -882,7 +900,6 @@ class TaulaResum:
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
                                     hab_npol += resultat[x][2]
                                 arxiu.close()
-                                self.tornaConnectat()
                                 if self.dlg.TOTS.isChecked() != True:
                                     QMessageBox.information(None, "Resultat", u"Taula resum creada amb " + str(hab_npol) + ' habitants')
                                 else:
@@ -895,7 +912,10 @@ class TaulaResum:
                                 message = template.format(type(ex).__name__, ex.args)
                                 print (message)
                                 self.tornaConnectat()
+                                self.dlg.setEnabled(True)
                                 QMessageBox.information(None, "Error", u"No s'ha pogut modificar la TaulaResum de la base de dades.\nComprova els privilegis que tens.")
+                        self.tornaConnectat()
+                        self.dlg.setEnabled(True)
                         conn.close()
                         
                     except Exception as ex:
@@ -904,11 +924,16 @@ class TaulaResum:
                         print (message)
                         self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: #ff7f7f')
                         self.dlg.lblEstatConn.setText('Error: Hi ha algun camp erroni.')
+                        self.dlg.setEnabled(True)
                         #print ("I am unable to connect to the database")
                 else:
                     QMessageBox.information(None, "Error", 'No hi ha un destí fitxat pel/s fitxer/s.\nTorneu a crear la taula i doneu un camí vàlid.')
+                    self.tornaConnectat()
+                    self.dlg.setEnabled(True)
             else:
                 QMessageBox.information(None, "Error", 'No hi ha cap connexió seleccionada.\nSeleccioneu una connexió.')
+                self.tornaConnectat()
+                self.dlg.setEnabled(True)
                 #print ("No hi ha cap filtre seleccionat.\nSeleccioneu un filtre.")
     
     def tornaConnectat(self):
@@ -918,6 +943,16 @@ class TaulaResum:
         self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: #7fff7f')
         self.dlg.lblEstatConn.setText('Connectat')
         QApplication.processEvents()
+        
+        
+    def setProcessant(self):
+        '''
+        Posa a l'etiqueta que indica les connexions
+        '''
+        self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: rgb(255, 125, 155)')
+        self.dlg.lblEstatConn.setText("Processant...")
+        QApplication.processEvents()
+        
     
     def on_click_btoData(self, enabled):
         '''
