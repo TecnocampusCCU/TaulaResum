@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.200214"
+Versio_modul="V_Q3.200218"
 
 '''
 Classe principal 'Taula Resum'
@@ -388,6 +388,7 @@ class TaulaResum:
         self.dlg.llistaEstudis.clear()
         self.dlg.LlistaZonesCont2.setEnabled(False)
         self.dlg.LlistaZonesCont.setEnabled(False)
+        self.dlg.setEnabled(True)
     
     def on_Change_ComboConn(self):
         '''
