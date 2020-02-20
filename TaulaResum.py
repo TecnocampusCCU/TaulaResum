@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.200218"
+Versio_modul="V_Q3.200220"
 
 '''
 Classe principal 'Taula Resum'
@@ -426,7 +426,7 @@ class TaulaResum:
             sql='select distinct("HABNIVINS"),"NINDESCRI" from "public"."Padro" order by 2;';
             self.dlg.LlistaPais.clear()
             self.dlg.LlistaPais2.clear()
-            sql2 = 'select distinct("HABCOMUNA"), "HABNOMUNA" FROM "public"."Padro" where "HABCOPANA" = 66 ORDER BY 2'
+            sql2 = 'select distinct("HABCOMUNA"), "HABNOMUNA" FROM "public"."Padro" where "HABCOPANA" != 108 ORDER BY 2'
             self.dlg.LlistaZonesCont.clear()
             self.dlg.LlistaZonesCont2.clear()
             sql3 = 'select distinct("CONZONCON") FROM "public"."CONTINENTS" WHERE "CONZONCON" IS NOT NULL ORDER BY 1'
@@ -676,7 +676,7 @@ class TaulaResum:
                                 if len(llistaORG)>0:
                                     for item in llistaORG:
                                         if item.toolTip() != '108':
-                                            where += '"HABCOMUNA" = '+ item.toolTip() + ' AND "HABCOPANA" = 66' + ' OR '
+                                            where += '"HABCOMUNA" = '+ item.toolTip() + ' AND "HABCOPANA" != 108' + ' OR '
                                         else:
                                             where += '"HABCOPANA" = 108' + ' OR '
                                     where=where[0:len(where)-4]
@@ -712,12 +712,12 @@ class TaulaResum:
                                     for index,row in enumerate(rows,start=0):
                                         if index == 0:
                                             if row[0] != 108:
-                                                where += '("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" = 66)'
+                                                where += '("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" != 108)'
                                             else:
                                                 where += '("HABCOPANA" = 108)'
                                         else:
                                             if row[0] != 108:
-                                                where += ' or ("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" = 66)'
+                                                where += ' or ("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" != 108)'
                                             else:
                                                 where += ' or ("HABCOPANA" = 108)'
                                     where += ')'
@@ -744,12 +744,12 @@ class TaulaResum:
                                 for index,row in enumerate(rows,start=0):
                                     if index == 0:
                                         if row[0] != 108:
-                                            where += '("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" = 66)'
+                                            where += '("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" != 108)'
                                         else:
                                             where += '("HABCOPANA" = 108)'
                                     else:
                                         if row[0] != 108:
-                                            where += ' or ("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" = 66)'
+                                            where += ' or ("HABCOMUNA" = ' + str(row[0]) + ' and "HABCOPANA" != 108)'
                                         else:
                                             where += ' or ("HABCOPANA" = 108)'
                                 where += ')'
