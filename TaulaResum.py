@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.200220"
+Versio_modul="V_Q3.200427"
 
 '''
 Classe principal 'Taula Resum'
@@ -676,7 +676,7 @@ class TaulaResum:
                                 if len(llistaORG)>0:
                                     for item in llistaORG:
                                         if item.toolTip() != '108':
-                                            where += '"HABCOMUNA" = '+ item.toolTip() + ' AND "HABCOPANA" != 108' + ' OR '
+                                            where += '"HABCOMUNA" = '+ item.toolTip().replace("\'","''") + ' AND "HABCOPANA" != 108' + ' OR '
                                         else:
                                             where += '"HABCOPANA" = 108' + ' OR '
                                     where=where[0:len(where)-4]
@@ -691,7 +691,7 @@ class TaulaResum:
                                 if len(llistaORG)>0:
                                     zonaCont = 'WHERE '
                                     for item in llistaORG:
-                                        zonaCont += '"CONZONCON" = '  + chr(39) + item.toolTip()  + chr(39) + ' OR '
+                                        zonaCont += '"CONZONCON" = '  + chr(39) + item.toolTip().replace("\'","''")  + chr(39) + ' OR '
 
                                     zonaCont=zonaCont[0:len(zonaCont)-4]
                                     SQL_Pro = 'SELECT "CONCODPAI" from "public"."CONTINENTS" '  + zonaCont  + ' ORDER BY 1'                                    
@@ -775,7 +775,7 @@ class TaulaResum:
                                 if len(llistaORG)>0:                               
                                     zonaCont = 'WHERE '
                                     for item in llistaORG:
-                                        zonaCont += '"CONZONCON" = '  + chr(39) + item.toolTip()  + chr(39) + ' OR '
+                                        zonaCont += '"CONZONCON" = '  + chr(39) + item.toolTip().replace("\'","''")  + chr(39) + ' OR '
 
                                     zonaCont=zonaCont[0:len(zonaCont)-4]
                                     SQL_Pro = 'SELECT "CONCODPAI" from "public"."CONTINENTS" '  + zonaCont  + ' ORDER BY 1' 
