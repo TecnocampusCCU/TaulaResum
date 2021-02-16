@@ -62,7 +62,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.200427"
+Versio_modul="V_Q3.210215"
 
 '''
 Classe principal 'Taula Resum'
@@ -839,7 +839,7 @@ class TaulaResum:
                                 hab_illes = 0
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                arxiu = open(fileName+ "\\tr_illes.csv", 'w')
+                                arxiu = open(fileName+ "/tr_illes.csv", 'w')
                                 arxiu.write("ILLES_Codificades;Habitants\n")
                                 for x in range(0, len(resultat)):
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
@@ -867,7 +867,7 @@ class TaulaResum:
                                 csv = sql + where + sql_gb
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                arxiu = open(fileName+ "\\tr_parceles.csv", 'w')
+                                arxiu = open(fileName+ "/tr_parceles.csv", 'w')
                                 arxiu.write("Parcela;Habitants\n")
                                 for x in range(0, len(resultat)):
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
@@ -895,7 +895,7 @@ class TaulaResum:
                                 csv = sql + where + sql_gb
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                arxiu = open(fileName+ "\\tr_npolicia.csv", 'w')
+                                arxiu = open(fileName+ "/tr_npolicia.csv", 'w')
                                 arxiu.write("NPolicia;Habitants\n")
                                 for x in range(0, len(resultat)):
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
