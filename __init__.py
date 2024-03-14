@@ -34,3 +34,4 @@ def classFactory(iface):  # pylint: disable=invalid-name
     #
     from .TaulaResum import TaulaResum
     return TaulaResum(iface)
+

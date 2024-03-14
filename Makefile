@@ -38,13 +38,13 @@ LOCALES =
 # translation
 SOURCES = \
 	__init__.py \
-	TaulaResum.py TaulaResum_dialog.py
+	TaulaResum.py TaulaResum_dialog.py TaulaResumOld.py TaulaResumRefactored.py
 
 PLUGINNAME = TaulaResum
 
 PY_FILES = \
 	__init__.py \
-	TaulaResum.py TaulaResum_dialog.py
+	TaulaResum.py TaulaResum_dialog.py TaulaResumOld.py TaulaResumRefactored.py
 
 UI_FILES = TaulaResum_dialog_base.ui
 
