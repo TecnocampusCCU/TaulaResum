@@ -957,7 +957,10 @@ class TaulaResum:
                                 hab_illes = 0
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                arxiu = open(fileName+ "/tr_illes.csv", 'w')
+                                if db_version == '1.0':
+                                    arxiu = open(fileName+ "/tr_illes_v1.csv", 'w')
+                                else:
+                                    arxiu = open(fileName+ "/tr_illes_v2.csv", 'w')
                                 arxiu.write("ILLES_Codificades;Habitants\n")
                                 for x in range(0, len(resultat)):
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
@@ -990,7 +993,10 @@ class TaulaResum:
                                 csv = sql + where + sql_gb
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                arxiu = open(fileName+ "/tr_parceles.csv", 'w')
+                                if db_version == '1.0':
+                                    arxiu = open(fileName+ "/tr_parceles_v1.csv", 'w')
+                                else:
+                                    arxiu = open(fileName+ "/tr_parceles_v2.csv", 'w')
                                 arxiu.write("Parcela;Habitants\n")
                                 for x in range(0, len(resultat)):
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
@@ -1024,7 +1030,10 @@ class TaulaResum:
                                 csv = sql + where + sql_gb
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                arxiu = open(fileName+ "/tr_npolicia.csv", 'w')
+                                if db_version == '1.0':
+                                    arxiu = open(fileName+ "/tr_npolicia_v1.csv", 'w')
+                                else:
+                                    arxiu = open(fileName+ "/tr_npolicia_v2.csv", 'w')
                                 arxiu.write("NPolicia;Habitants\n")
                                 for x in range(0, len(resultat)):
                                     arxiu.write(str(resultat[x][1]) +  ";" + str(resultat[x][2]) + "\n")
