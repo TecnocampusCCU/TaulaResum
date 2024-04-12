@@ -60,7 +60,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.240318"
+Versio_modul="V_Q3.240412"
 
 versio_db=None
 
@@ -553,15 +553,15 @@ class TaulaResum:
             self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: #FFFFFF')
     
     def detect_database_version(self, cur, conn):
-        global db_version
+        global versio_db
         cur.execute("""
                     SELECT taula
                     FROM config
                     WHERE variable = 'versio';
                     """)
-        db_version = cur.fetchone()[0]
-        print(db_version)
-        if db_version == '1.0':
+        versio_db = cur.fetchone()[0]
+        print(versio_db)
+        if versio_db == '1.0':
             cur.execute("""
                         DROP TABLE IF EXISTS census;
                         CREATE TABLE census (
@@ -688,6 +688,8 @@ class TaulaResum:
                         self.dlg.lblEstatConn.setText('Connectat i processant')
                         QApplication.processEvents()
                         cur = conn.cursor()
+                        self.eliminaTaulesTemporals(cur, conn) # per si ja existeixen, per a que un usuari sense permisos d'administrador pugui executar el plugin sense errors
+                        self.detect_database_version(cur, conn)
                         
                         '''Composicio del where'''
                         '''Filtre d'edat'''
@@ -957,7 +959,7 @@ class TaulaResum:
                                 hab_illes = 0
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                if db_version == '1.0':
+                                if versio_db == '1.0':
                                     arxiu = open(fileName+ "/tr_illes_v1.csv", 'w')
                                 else:
                                     arxiu = open(fileName+ "/tr_illes_v2.csv", 'w')
@@ -993,7 +995,7 @@ class TaulaResum:
                                 csv = sql + where + sql_gb
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                if db_version == '1.0':
+                                if versio_db == '1.0':
                                     arxiu = open(fileName+ "/tr_parceles_v1.csv", 'w')
                                 else:
                                     arxiu = open(fileName+ "/tr_parceles_v2.csv", 'w')
@@ -1030,7 +1032,7 @@ class TaulaResum:
                                 csv = sql + where + sql_gb
                                 cur.execute(csv)
                                 resultat = cur.fetchall()
-                                if db_version == '1.0':
+                                if versio_db == '1.0':
                                     arxiu = open(fileName+ "/tr_npolicia_v1.csv", 'w')
                                 else:
                                     arxiu = open(fileName+ "/tr_npolicia_v2.csv", 'w')
@@ -1073,6 +1075,7 @@ class TaulaResum:
                 else:
                     QMessageBox.information(None, "Error", 'No hi ha un destí fitxat pel/s fitxer/s.\nTorneu a crear la taula i doneu un camí vàlid.')
                     self.tornaConnectat()
+                    self.eliminaTaulesTemporals(cur, conn)
                     self.dlg.setEnabled(True)
             else:
                 QMessageBox.information(None, "Error", 'No hi ha cap connexió seleccionada.\nSeleccioneu una connexió.')
@@ -1162,6 +1165,7 @@ class TaulaResum:
         try:
             if versio_db == '1.0':
                 cur.execute("DROP TABLE IF EXISTS census")
+                conn.commit()
                 cur.execute("DROP TABLE IF EXISTS country") 
                 conn.commit()
         except Exception as ex:
