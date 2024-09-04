@@ -42,6 +42,7 @@ from qgis.utils import iface
 import psycopg2
 from decimal import *
 import unicodedata
+import datetime
 
 # Initialize Qt resources from file resources.py
 from .resources import *
@@ -60,9 +61,10 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.240412"
+Versio_modul="V_Q3.240904"
 
 versio_db=None
+Fitxer=""
 
 '''
 Classe principal 'Taula Resum'
@@ -453,27 +455,27 @@ class TaulaResum:
                 QMessageBox.information(None, "Error", msg_error)
             #Sentencia SQL Estudis
             self.dlg.llistaEstudis.clear()
-            sql=''' SELECT DISTINCT studies_code, studies
-                    FROM census 
+            sql=f'''SELECT DISTINCT studies_code, studies
+                    FROM census_{Fitxer} 
                     ORDER BY 2;'''
             self.dlg.LlistaPais.clear()
             self.dlg.LlistaPais2.clear()
-            sql2 = '''  SELECT DISTINCT previous_place_code, previous_place_name 
-                        FROM census 
+            sql2 = f''' SELECT DISTINCT previous_place_code, previous_place_name 
+                        FROM census_{Fitxer} 
                         WHERE origin_code != 108
                         ORDER BY 2;'''
             self.dlg.LlistaZonesCont.clear()
             self.dlg.LlistaZonesCont2.clear()
-            sql3 = '''  SELECT DISTINCT continent_zone
-                        FROM country
+            sql3 = f''' SELECT DISTINCT continent_zone
+                        FROM country_{Fitxer}
                         WHERE continent_zone IS NOT NULL
                         ORDER BY 1;'''
-            sql4 = '''
+            sql4 = f'''
                     SELECT description
                     FROM pg_description
                     JOIN pg_class ON pg_description.objoid = pg_class.oid
                     JOIN pg_namespace ON pg_class.relnamespace = pg_namespace.oid
-                    WHERE relname = 'census' AND nspname = 'public';'''
+                    WHERE relname = 'census_{Fitxer}' AND nspname = 'public';'''
             try:
                 cur.execute(sql)
             except Exception as ex:
@@ -562,9 +564,9 @@ class TaulaResum:
         versio_db = cur.fetchone()[0]
         print(versio_db)
         if versio_db == '1.0':
-            cur.execute("""
-                        DROP TABLE IF EXISTS census;
-                        CREATE TABLE census (
+            cur.execute(f"""
+                        DROP TABLE IF EXISTS census_{Fitxer};
+                        CREATE TABLE census_{Fitxer} (
                             cadastral_reference,
                             cadastral_zoning_reference,
                             studies_code,
@@ -580,11 +582,11 @@ class TaulaResum:
                         ) AS SELECT "REFCAD", "D_S_I", "HABNIVINS", "NINDESCRI", "HABCOMUNA", "HABCOPANA", "HABFECNAC", "HABELSEXO", "HABNACION", "CarrerNumBis", "id", "HABNOMUNA" FROM "Padro";
                         """)
             conn.commit()
-            print("Versió de la base de dades: 1.0, executant create table census")
+            print(f"Versió de la base de dades: 1.0, executant create table census_{Fitxer}")
 
-            cur.execute("""
-                        DROP TABLE IF EXISTS country;
-                        CREATE TABLE country (
+            cur.execute(f"""
+                        DROP TABLE IF EXISTS country_{Fitxer};
+                        CREATE TABLE country_{Fitxer} (
                             continent_zone,
                             country_code,
                             ue27
@@ -592,7 +594,14 @@ class TaulaResum:
                         """)
             
             conn.commit()
-            print("Versió de la base de dades: 1.0, executant create table country")
+            print(f"Versió de la base de dades: 1.0, executant create table country_{Fitxer}")
+        else:
+            cur.execute(f"""CREATE TABLE census_{Fitxer} AS SELECT * FROM census;""")
+            conn.commit()
+            print(f"Versió de la base de dades: 2.0, executant create table census_{Fitxer}")
+            cur.execute(f"""CREATE TABLE country_{Fitxer} AS SELECT * FROM country;""")
+            conn.commit()
+            print(f"Versió de la base de dades: 2.0, executant create table country_{Fitxer}")
     
     def tornaConnectat(self):
         '''
@@ -657,8 +666,7 @@ class TaulaResum:
                 ##startingDir = cmds.workspace(q=True, rootDirectory=True)
                 '''Eleccio del cami de destí dels arxius'''
                 fileName= QFileDialog.getExistingDirectory(self.dlg,"Open a folder","c:/",QFileDialog.ShowDirsOnly)
-                if fileName != '':
-                                       
+                if fileName != '':                             
                     s.beginGroup("PostgreSQL/connections/"+nom_conn)
                     currentKeys = s.childKeys()
                     '''Connexio'''
@@ -765,7 +773,7 @@ class TaulaResum:
                         '''Filtre d'estudis'''
                         if self.dlg.btoESTUDIS.isChecked():
                             if self.dlg.btoEDAT.isChecked() or self.dlg.btoGENERE.isChecked():
-                               where += ' AND '
+                                where += ' AND '
                             llistaEST = self.dlg.llistaEstudis.selectedItems()
                             if len(llistaEST)>0:
                                 for item in llistaEST:
@@ -781,7 +789,7 @@ class TaulaResum:
                         '''Filtre d'origen'''
                         if self.dlg.btoORIGEN.isChecked():
                             if self.dlg.btoEDAT.isChecked() or self.dlg.btoGENERE.isChecked() or self.dlg.btoESTUDIS.isChecked():
-                               where += ' AND '
+                                where += ' AND '
                             if self.dlg.btoPais.isChecked():
                                 llistaORG = self.dlg.LlistaPais.selectedItems()
                                 if len(llistaORG)>0:
@@ -792,11 +800,11 @@ class TaulaResum:
                                             where += 'origin_code = 108' + ' OR '
                                     where=where[0:len(where)-4]
                                 else:
-                                   QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap país seleccionat.")
-                                   self.dlg.GrupPestanyes.setCurrentIndex(3)
-                                   self.tornaConnectat()
-                                   self.dlg.setEnabled(True)
-                                   return 
+                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap país seleccionat.")
+                                    self.dlg.GrupPestanyes.setCurrentIndex(3)
+                                    self.tornaConnectat()
+                                    self.dlg.setEnabled(True)
+                                    return 
                             elif self.dlg.btoZones.isChecked():
                                 llistaORG = self.dlg.LlistaZonesCont.selectedItems()
                                 if len(llistaORG)>0:
@@ -805,7 +813,7 @@ class TaulaResum:
                                         zonaCont += 'continent_zone = '  + chr(39) + item.toolTip().replace("\'","''")  + chr(39) + ' OR '
 
                                     zonaCont=zonaCont[0:len(zonaCont)-4]
-                                    SQL_Pro = 'SELECT country_code FROM country ' + zonaCont + ' ORDER BY 1'                                    
+                                    SQL_Pro = f'SELECT country_code FROM country_{Fitxer} ' + zonaCont + ' ORDER BY 1'                                    
                                     
                                     try:
                                         cur.execute(SQL_Pro)
@@ -834,14 +842,14 @@ class TaulaResum:
                                                 where += ' OR (origin_code = 108)'
                                     where += ')'
                                 else:
-                                   QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap zona continental seleccionada.")
-                                   self.dlg.GrupPestanyes.setCurrentIndex(3)
-                                   self.tornaConnectat()
-                                   self.dlg.setEnabled(True)
-                                   return
+                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap zona continental seleccionada.")
+                                    self.dlg.GrupPestanyes.setCurrentIndex(3)
+                                    self.tornaConnectat()
+                                    self.dlg.setEnabled(True)
+                                    return
                             elif self.dlg.btoEuropa27.isChecked():
-                                SQL_Pro = '''   SELECT country_code 
-                                                FROM country
+                                SQL_Pro = f'''   SELECT country_code 
+                                                FROM country_{Fitxer}
                                                 WHERE ue27 = 1 
                                                 ORDER BY 1'''
                                 try:
@@ -873,7 +881,7 @@ class TaulaResum:
                         '''Filtre de nacionalitat'''
                         if self.dlg.btoNACIONALITAT.isChecked():
                             if self.dlg.btoEDAT.isChecked() or self.dlg.btoGENERE.isChecked() or self.dlg.btoESTUDIS.isChecked() or self.dlg.btoORIGEN.isChecked():
-                               where += ' AND '
+                                where += ' AND '
                             if self.dlg.btoPais_3.isChecked():
                                 llistaORG = self.dlg.LlistaPais2.selectedItems()
                                 if len(llistaORG)>0:
@@ -881,11 +889,11 @@ class TaulaResum:
                                         where += 'nation_code = '+ item.toolTip() + ' OR '
                                     where=where[0:len(where)-4]
                                 else:
-                                   QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap país seleccionat.")
-                                   self.dlg.GrupPestanyes.setCurrentIndex(4)
-                                   self.tornaConnectat()
-                                   self.dlg.setEnabled(True)
-                                   return 
+                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap país seleccionat.")
+                                    self.dlg.GrupPestanyes.setCurrentIndex(4)
+                                    self.tornaConnectat()
+                                    self.dlg.setEnabled(True)
+                                    return 
                             elif self.dlg.btoZones_3.isChecked():
                                 llistaORG = self.dlg.LlistaZonesCont2.selectedItems()
                                 if len(llistaORG)>0:                               
@@ -894,7 +902,7 @@ class TaulaResum:
                                         zonaCont += 'continent_zone = '  + chr(39) + item.toolTip().replace("\'","''")  + chr(39) + ' OR '
 
                                     zonaCont=zonaCont[0:len(zonaCont)-4]
-                                    SQL_Pro = 'SELECT country_code from country '  + zonaCont  + ' ORDER BY 1' 
+                                    SQL_Pro = f'SELECT country_code from country_{Fitxer} '  + zonaCont  + ' ORDER BY 1' 
                                     try:
                                         cur.execute(SQL_Pro)
                                         rows = cur.fetchall()
@@ -915,13 +923,13 @@ class TaulaResum:
                                             where += ' OR nation_code = ' + str(row[0])
                                     where += ')'
                                 else:
-                                   QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap zona continental seleccionada.")
-                                   self.dlg.GrupPestanyes.setCurrentIndex(4)
-                                   self.tornaConnectat()
-                                   self.dlg.setEnabled(True)
-                                   return
+                                    QMessageBox.information(None, "Error", u"Error:\nNo hi ha cap zona continental seleccionada.")
+                                    self.dlg.GrupPestanyes.setCurrentIndex(4)
+                                    self.tornaConnectat()
+                                    self.dlg.setEnabled(True)
+                                    return
                             elif self.dlg.btoEuropa27_3.isChecked():
-                                SQL_Pro = 'SELECT country_code from country WHERE ue27 = 1 ORDER BY 1'
+                                SQL_Pro = f'SELECT country_code from country_{Fitxer} WHERE ue27 = 1 ORDER BY 1'
                                 try:
                                     cur.execute(SQL_Pro)
                                     rows = cur.fetchall()
@@ -949,9 +957,9 @@ class TaulaResum:
                         if self.dlg.ILLES.isChecked() or self.dlg.TOTS.isChecked():
                             #dl = 'delete from "public"."Resum2";' 
                             #ins = 'insert into  "public"."Resum2"\n'
-                            sql = '''
+                            sql = f'''
                             SELECT ROW_NUMBER() OVER () AS id, "cadastral_zoning_reference" AS ILLES_Codificades, COUNT(*) AS Habitants
-                            FROM census\n'''
+                            FROM census_{Fitxer}\n'''
                             sql_gb = 'GROUP BY cadastral_zoning_reference\nORDER BY 2'
                             #sum = 'select sum("Habitants") from Resum_Tmp;'
                             csv = sql + where + sql_gb
@@ -985,9 +993,9 @@ class TaulaResum:
                             #dl = 'delete from "public"."ResumParcela2"'
                             #ins = 'insert into  "public"."ResumParcela2"\n'
                             sql = 'select row_number() OVER () AS id, "REFCAD" as Parcela, count(*) as Habitants from "public"."Padro"\n'
-                            sql = '''
+                            sql = f'''
                             SELECT ROW_NUMBER() OVER () AS id, cadastral_reference AS Parcela, COUNT(*) AS Habitants
-                            FROM census\n'''
+                            FROM census_{Fitxer}\n'''
                             sql_gb = 'GROUP BY cadastral_reference\nORDER BY 2'
                             #sum = 'select sum("Habitants") from "public"."ResumParcela2"'
                             try:
@@ -1021,9 +1029,9 @@ class TaulaResum:
                             #dl = 'delete from "public"."ResumNPolicia2"'
                             #ins = 'insert into  "public"."ResumNPolicia2"\n'
                             sql = 'select row_number() OVER () AS id, "CarrerNumBis" as NPolicia, count(*) as Habitants from "public"."Padro"\n'
-                            sql = '''
+                            sql = f'''
                             SELECT ROW_NUMBER() OVER () AS id, designator AS NPolicia, COUNT(*) AS Habitants
-                            FROM census\n
+                            FROM census_{Fitxer}\n
                             '''
                             sql_gb = 'GROUP BY designator\nORDER BY 2'
                             #sum = 'select sum("Habitants") from "public"."ResumNPolicia2"'
@@ -1144,6 +1152,7 @@ class TaulaResum:
 
 
     def run(self):
+        global Fitxer
         '''
         Run method that performs all the real work
         '''
@@ -1153,6 +1162,7 @@ class TaulaResum:
         self.dlg.show()
         
         self.populateComboBox(self.dlg.comboConnexions ,conn,'Selecciona connexió',True)
+        Fitxer=datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
@@ -1163,11 +1173,10 @@ class TaulaResum:
 
     def eliminaTaulesTemporals(self,cur, conn):
         try:
-            if versio_db == '1.0':
-                cur.execute("DROP TABLE IF EXISTS census")
-                conn.commit()
-                cur.execute("DROP TABLE IF EXISTS country") 
-                conn.commit()
+            cur.execute(f"DROP TABLE IF EXISTS census_{Fitxer}")
+            conn.commit()
+            cur.execute(f"DROP TABLE IF EXISTS country_{Fitxer}") 
+            conn.commit()
         except Exception as ex:
             print("Error DROP final")
             template = "An exception of type {0} occurred. Arguments:\n{1!r}"
