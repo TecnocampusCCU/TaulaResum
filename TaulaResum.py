@@ -1174,7 +1174,7 @@ class TaulaResum:
         self.dlg.show()
         
         self.populateComboBox(self.dlg.comboConnexions ,conn,'Selecciona connexió',True)
-        Fitxer=datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
+        Fitxer="_ccu_temp"+datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
