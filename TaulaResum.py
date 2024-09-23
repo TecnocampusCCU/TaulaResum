@@ -61,10 +61,13 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.240904"
+Versio_modul="V_Q3.240923"
 
 versio_db=None
 Fitxer=""
+cur=None
+conn=None
+connexioFeta = False
 
 '''
 Classe principal 'Taula Resum'
@@ -119,6 +122,8 @@ class TaulaResum:
         self.dlg.btoZones.toggled.connect(self.on_click_btoZones)
         self.dlg.btoZones_3.toggled.connect(self.on_click_btoZones2)
         self.dlg.btoCrearTaula.clicked.connect(self.on_click_crearTaula)
+
+        self.dlg.rejected.connect(self.on_click_Sortir)
 
         # Declare instance attributes
         self.actions = []
@@ -266,10 +271,10 @@ class TaulaResum:
                   
     
     def on_click_Sortir(self):
-        '''/
+        '''
         Tanca la finestra del plugin 
         '''
-        self.EstatInicial()
+        self.eliminaTaulesTemporals(cur, conn)
         self.dlg.close()
         
     def on_click_MarcarBotoHome(self, clicked):
@@ -415,6 +420,9 @@ class TaulaResum:
         global usuari1
         global schema
         global versio_db
+        global cur
+        global conn
+        global connexioFeta
         s = QSettings()
         select = 'Selecciona connexió'
         nom_conn=self.dlg.comboConnexions.currentText()
@@ -445,6 +453,7 @@ class TaulaResum:
                 self.dlg.lblEstatConn.setText('Connectat')
                 cur = conn.cursor()
                 self.detect_database_version(cur, conn)
+                connexioFeta = True
             except Exception as ex:
                 self.eliminaTaulesTemporals(cur, conn)
                 msg_error="Error en l'establiment de la connexio amb la base de dades"
@@ -549,7 +558,7 @@ class TaulaResum:
                 self.dlg.data.setDateTime(QtCore.QDateTime.fromString(str(rows[0][0]),"d/M/yyyy"))
             else:
                 self.dlg.data.setDateTime(QtCore.QDateTime.currentDateTime())
-            conn.close()        
+            #conn.close()        
         else:
             self.dlg.lblEstatConn.setText('No connectat')
             self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: #FFFFFF')
@@ -647,6 +656,9 @@ class TaulaResum:
         global port1
         global usuari1
         global schema
+        global cur
+        global conn
+
         s = QSettings()
         
         
@@ -1069,7 +1081,7 @@ class TaulaResum:
                         self.tornaConnectat()
                         self.dlg.setEnabled(True)
                         self.eliminaTaulesTemporals(cur, conn)
-                        conn.close()
+                        #conn.close()
                         
                     except Exception as ex:
                         self.eliminaTaulesTemporals(cur, conn)
@@ -1172,22 +1184,23 @@ class TaulaResum:
             pass
 
     def eliminaTaulesTemporals(self,cur, conn):
-        try:
-            cur.execute(f"DROP TABLE IF EXISTS census_{Fitxer}")
-            conn.commit()
-            cur.execute(f"DROP TABLE IF EXISTS country_{Fitxer}") 
-            conn.commit()
-        except Exception as ex:
-            print("Error DROP final")
-            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-            message = template.format(type(ex).__name__, ex.args)
-            print (message)
-            QMessageBox.information(None, "Error", "Error DROP final")
-            conn.rollback()
-            self.bar.clearWidgets()
-            self.dlg.Progres.setValue(0)
-            self.dlg.Progres.setVisible(False)
-            self.dlg.lblEstatConn.setText('Connectat')
-            self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: #7fff7f')
-            self.dlg.setEnabled(True)
-            self.dlg.setEnabled(True)
+        if connexioFeta:
+            try:
+                cur.execute(f"DROP TABLE IF EXISTS census_{Fitxer}")
+                conn.commit()
+                cur.execute(f"DROP TABLE IF EXISTS country_{Fitxer}") 
+                conn.commit()
+            except Exception as ex:
+                print("Error DROP final")
+                template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                message = template.format(type(ex).__name__, ex.args)
+                print (message)
+                QMessageBox.information(None, "Error", "Error DROP final")
+                conn.rollback()
+                self.bar.clearWidgets()
+                self.dlg.Progres.setValue(0)
+                self.dlg.Progres.setVisible(False)
+                self.dlg.lblEstatConn.setText('Connectat')
+                self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: #7fff7f')
+                self.dlg.setEnabled(True)
+                self.dlg.setEnabled(True)
