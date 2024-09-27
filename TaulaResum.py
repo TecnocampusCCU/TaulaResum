@@ -61,7 +61,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.240923"
+Versio_modul="V_Q3.240927"
 
 versio_db=None
 Fitxer=""
@@ -759,12 +759,11 @@ class TaulaResum:
                                 if self.dlg.btoData.isChecked():
                                     diaTriatMin = str(hora.day()) + "-" + str(hora.month()) + "-" + str(hora.year() - min)
                                     diaTriatMax = str(hora.day()) + "-" + str(hora.month()) + "-" + str(hora.year() - (max+1))
-                                    where += 'date_of_birth > to_date(' + "'" + diaTriatMax + "'," + "'DD-MM-YYYY')" + ' AND date_of_birth <= to_date(' + "'" + diaTriatMin + "'," + "'DD-MM-YYYY')'"
+                                    where += 'date_of_birth > to_date(' + "'" + diaTriatMax + "'," + "'DD-MM-YYYY')" + ' AND date_of_birth <= to_date(' + "'" + diaTriatMin + "'," + "'DD-MM-YYYY')"
                                     
                                 elif self.dlg.btoDataAvui.isChecked():
                                     diaTriatMin = str(horaAct.date().day()) + "-" + str(horaAct.date().month()) + "-" + str(horaAct.date().year() - min)
                                     diaTriatMax = str(horaAct.date().day()) + "-" + str(horaAct.date().month()) + "-" + str(horaAct.date().year() - (max+1))
-                                    where += '"HABFECNAC" > to_date(' + "'" + diaTriatMax + "'," + "'DD-MM-YYYY')" + ' AND "HABFECNAC" <= to_date(' + "'" + diaTriatMin + "'," + "'DD-MM-YYYY')"
                                     where += 'date_of_birth > to_date(' + "'" + diaTriatMax + "'," + "'DD-MM-YYYY')" + ' AND date_of_birth <= to_date(' + "'" + diaTriatMin + "'," + "'DD-MM-YYYY')"
                         
                         '''Filtre de genere'''    
@@ -1197,9 +1196,9 @@ class TaulaResum:
                 print (message)
                 QMessageBox.information(None, "Error", "Error DROP final")
                 conn.rollback()
-                self.bar.clearWidgets()
-                self.dlg.Progres.setValue(0)
-                self.dlg.Progres.setVisible(False)
+                #self.bar.clearWidgets()
+                #self.dlg.Progres.setValue(0)
+                #self.dlg.Progres.setVisible(False)
                 self.dlg.lblEstatConn.setText('Connectat')
                 self.dlg.lblEstatConn.setStyleSheet('border:1px solid #000000; background-color: #7fff7f')
                 self.dlg.setEnabled(True)
