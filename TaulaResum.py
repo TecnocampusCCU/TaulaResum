@@ -61,7 +61,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.240927"
+Versio_modul="V_Q3.241008"
 
 versio_db=None
 Fitxer=""
@@ -485,6 +485,13 @@ class TaulaResum:
                     JOIN pg_class ON pg_description.objoid = pg_class.oid
                     JOIN pg_namespace ON pg_class.relnamespace = pg_namespace.oid
                     WHERE relname = 'census_{Fitxer}' AND nspname = 'public';'''
+            sql4 = f'''
+                    SELECT obj_description(pg_class.oid, 'pg_class') AS table_comment
+                    FROM pg_class
+                    JOIN pg_namespace ON pg_class.relnamespace = pg_namespace.oid
+                    WHERE pg_class.relname = 'census'
+                    AND pg_namespace.nspname = 'public';
+                    '''
             try:
                 cur.execute(sql)
             except Exception as ex:
@@ -555,7 +562,15 @@ class TaulaResum:
                 QMessageBox.information(None, "Error", msg_error)
             rows = cur.fetchall()
             if len(rows)!=0:
-                self.dlg.data.setDateTime(QtCore.QDateTime.fromString(str(rows[0][0]),"d/M/yyyy"))
+                date_str = str(rows[0][0])
+                day, month, year = date_str.split('/')
+                
+                if len(year) == 2:
+                    year = "20" + year
+                
+                formatted_date_str = f"{day}/{month}/{year}"
+
+                self.dlg.data.setDateTime(QtCore.QDateTime.fromString(formatted_date_str,"d/M/yyyy"))
             else:
                 self.dlg.data.setDateTime(QtCore.QDateTime.currentDateTime())
             #conn.close()        
@@ -1173,7 +1188,7 @@ class TaulaResum:
         self.dlg.show()
         
         self.populateComboBox(self.dlg.comboConnexions ,conn,'Selecciona connexió',True)
-        Fitxer="_ccu_temp"+datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
+        Fitxer="ccu_temp"+datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
