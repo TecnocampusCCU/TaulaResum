@@ -8,9 +8,9 @@
 
 [general]
 name=TaulaResum
-qgisMinimumVersion=3.0
+qgisMinimumVersion=3.44
 description=Modul per obtenir les taules resum del Padro
-version=Q3.241008
+version=Q4.250929
 author=Josep Lopez Xarbau / CCU
 email=jlopez@tecnocampus.cat
 
@@ -37,3 +37,5 @@ experimental=False
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
 
+# Add Qt6 compatibility
+supportsQt6=True

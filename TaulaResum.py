@@ -32,10 +32,10 @@ from .TaulaResum_dialog import TaulaResumDialog
 import os.path
 """
 import sys
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtSql import *
-from PyQt5.QtWidgets import QAction,QMessageBox,QTableWidgetItem, QApplication, QFileDialog,QToolBar
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtSql import *
+from qgis.PyQt.QtWidgets import QAction,QMessageBox,QTableWidgetItem, QApplication, QFileDialog,QToolBar
 
 #from qgis.core import QgsDataSourceURI
 from qgis.utils import iface
@@ -61,7 +61,7 @@ port1=""
 usuari1=""
 schema=""
 micolor=None
-Versio_modul="V_Q3.241008"
+Versio_modul="V_Q4.250929"
 
 versio_db=None
 Fitxer=""
@@ -692,7 +692,7 @@ class TaulaResum:
                 #fileName = QtGui.QFileDialog.getSaveFileName(self.dlg, "Guardar com...", "c:/", "CSV files (*.csv)")
                 ##startingDir = cmds.workspace(q=True, rootDirectory=True)
                 '''Eleccio del cami de destí dels arxius'''
-                fileName= QFileDialog.getExistingDirectory(self.dlg,"Open a folder","c:/",QFileDialog.ShowDirsOnly)
+                fileName= QFileDialog.getExistingDirectory(self.dlg,"Open a folder","c:/",QFileDialog.Option.ShowDirsOnly)
                 if fileName != '':                             
                     s.beginGroup("PostgreSQL/connections/"+nom_conn)
                     currentKeys = s.childKeys()
@@ -1190,7 +1190,7 @@ class TaulaResum:
         self.populateComboBox(self.dlg.comboConnexions ,conn,'Selecciona connexió',True)
         Fitxer="ccu_temp"+datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
         # Run the dialog event loop
-        result = self.dlg.exec_()
+        result = self.dlg.exec()
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and
